@@ -1,0 +1,11 @@
+mat-sidenav {
+    width: 300px;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+.mat-drawer-container {
+    position: inherit;
+}
