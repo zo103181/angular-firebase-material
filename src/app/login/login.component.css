@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form > * {
+    width: 30%;
+}
+
+form > mat-form-field mat-icon {
+    cursor: pointer;
+}
