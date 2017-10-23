@@ -3,10 +3,11 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 85px 25px 25px 25px;
 }
 
 form > * {
-    width: 30%;
+    width: 300px;
 }
 
 form > mat-form-field mat-icon {

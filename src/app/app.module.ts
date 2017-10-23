@@ -13,16 +13,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatToolbarModule,
     RouterModule.forRoot(appRoutes)
   ],
   // creators of services that this module contributes to 
