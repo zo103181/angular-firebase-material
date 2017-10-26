@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 // Services
+import { AuthenticationGuard } from './services/authentication-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { SidenavService } from './services/sidenav.service';
 
@@ -68,6 +69,7 @@ import { HomeComponent } from './home/home.component';
   // the global collection of services; 
   // they become accessible in all parts of the app.
   providers: [
+    AuthenticationGuard,
     AuthenticationService,
     SidenavService
   ],
