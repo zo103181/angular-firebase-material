@@ -5,10 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 // Services
+import { AuthenticationService } from './services/authentication.service';
 import { SidenavService } from './services/sidenav.service';
 
 // Routes
 import { appRoutes } from '../routes';
+
+// Environments
+import { environment } from '../environments/environment';
+
+// Angular Fire
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Angular Material Components / Animations
 // -- be sure to import the Angular Material modules 
@@ -16,6 +25,7 @@ import { appRoutes } from '../routes';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
+  MatCardModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -39,10 +49,14 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -54,6 +68,7 @@ import { HomeComponent } from './home/home.component';
   // the global collection of services; 
   // they become accessible in all parts of the app.
   providers: [
+    AuthenticationService,
     SidenavService
   ],
   // the main application view, called the root component, that 

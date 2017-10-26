@@ -6,8 +6,13 @@ form {
     padding: 85px 25px 25px 25px;
 }
 
-form > * {
+form > mat-form-field, form > button {
     width: 300px;
+}
+
+form > mat-card {
+    margin-top: 25px;
+    width: 250px;
 }
 
 form > mat-form-field mat-icon {
