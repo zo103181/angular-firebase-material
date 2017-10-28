@@ -20,6 +20,10 @@ export class AuthenticationService {
     return this.afAuth.auth.signOut();
   }
 
+  signup(user: User) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+  }
+
   authUser() {
     return this.user;
   }

@@ -40,6 +40,7 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     NavbarComponent,
     SidenavComponent,
-    HomeComponent
+    HomeComponent,
+    SignupComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

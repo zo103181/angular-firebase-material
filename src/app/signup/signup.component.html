@@ -1,0 +1,18 @@
+<form #signupForm="ngForm">
+  <mat-form-field>
+      <input matInput [(ngModel)]="email" placeholder="Email" name="email" maxlength="70" email required>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput [(ngModel)]="password" placeholder="Password" name="password" maxlength="70" type="password" required>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput [(ngModel)]="passwordConfirm" placeholder="Password (Confirm)" name="passwordConfirm" maxlength="70" type="password" required>
+  </mat-form-field>
+  <button mat-raised-button type="button" [disabled]="!signupForm.form.valid" (click)="signUp()" color="primary">Create Account</button>
+  <div style="margin-top: 5px;">Already have an account?</div>
+  <a href="/login" color="primary">Login</a>
+  <mat-card *ngIf="errorMsg">
+      <mat-card-title>Error</mat-card-title>
+      <mat-card-content>{{errorMsg}}</mat-card-content>
+  </mat-card>
+</form>
