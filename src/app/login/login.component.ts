@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { User } from '../classes/user.class';
 
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -11,9 +12,8 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+  user: User;
   hide = true;
-  email: string;
-  password: string;
   errorMsg: string;
 
   constructor(
@@ -22,10 +22,15 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
   }
 
   signIn() {
-    this.authService.login({ email: this.email, password: this.password })
+    this.authService.login({ email: this.user.email, password: this.user.password })
       .then(resolve => this.router.navigate(['home']))
       .catch(error => this.errorMsg = error.message);
   }

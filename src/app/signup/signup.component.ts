@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { User } from '../classes/user.class';
+
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -10,9 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class SignupComponent implements OnInit {
 
-  email: string;
-  password: string;
-  passwordConfirm: string;
+  user: User;
   errorMsg: string;
 
   constructor(
@@ -21,13 +21,18 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
   }
 
   signUp() {
-    if (this.password !== this.passwordConfirm) {
+    if (this.user.password !== this.user.confirmPassword) {
       this.throwErrorMsg('Your passwords do not match!');
     } else {
-      this.authService.signup({ email: this.email, password: this.password })
+      this.authService.signup({ email: this.user.email, password: this.user.password })
         .then(resolve => this.router.navigate(['home']))
         .catch(error => {
           this.throwErrorMsg(error.message);

@@ -9,6 +9,9 @@ import { AuthenticationGuard } from './services/authentication-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { SidenavService } from './services/sidenav.service';
 
+// Directives
+import { EqualValidator } from './directives/equal-validator.directive';
+
 // Routes
 import { appRoutes } from '../routes';
 
@@ -49,7 +52,8 @@ import { SignupComponent } from './signup/signup.component';
     NavbarComponent,
     SidenavComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    EqualValidator
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

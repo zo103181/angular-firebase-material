@@ -1,18 +1,57 @@
 <form #signupForm="ngForm">
-  <mat-form-field>
-      <input matInput [(ngModel)]="email" placeholder="Email" name="email" maxlength="70" email required>
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput [(ngModel)]="password" placeholder="Password" name="password" maxlength="70" type="password" required>
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput [(ngModel)]="passwordConfirm" placeholder="Password (Confirm)" name="passwordConfirm" maxlength="70" type="password" required>
-  </mat-form-field>
-  <button mat-raised-button type="button" [disabled]="!signupForm.form.valid" (click)="signUp()" color="primary">Create Account</button>
-  <div style="margin-top: 5px;">Already have an account?</div>
-  <a href="/login" color="primary">Login</a>
-  <mat-card *ngIf="errorMsg">
-      <mat-card-title>Error</mat-card-title>
-      <mat-card-content>{{errorMsg}}</mat-card-content>
-  </mat-card>
+    <mat-form-field>
+        <input matInput 
+               type="email" 
+               name="email" 
+               placeholder="Email" 
+               #email="ngModel"
+               [(ngModel)]="user.email"
+               pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}"
+               required>
+        <mat-error *ngIf="email.invalid && user.email === ''">
+            Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="email.invalid && user.email !== ''">
+            Email is <strong>not</strong> formatted properly
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input 
+            matInput 
+            type="password"
+            name="password"
+            placeholder="Password"
+            #password="ngModel"
+            validateEqual="confirmPassword"
+            reverse="true"
+            [(ngModel)]="user.password"
+            required>
+            <mat-error *ngIf="password.invalid">
+                Password is <strong>required</strong>
+            </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input 
+            matInput 
+            type="password"
+            name="confirmPassword"
+            placeholder="Password (Confirm)"
+            #confirmpassword="ngModel"
+            validateEqual="password"
+            [(ngModel)]="user.confirmPassword"
+            required>
+        <mat-error *ngIf="confirmpassword.invalid && user.confirmPassword == ''">
+            Password (Confirm) is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="confirmpassword.invalid && user.confirmPassword != ''">
+            Passwords do <strong>not</strong> match
+        </mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="button" [disabled]="!signupForm.form.valid" (click)="signUp()" color="primary">Create Account</button>
+    <div style="margin-top: 5px;">Already have an account?</div>
+    <a href="/login" color="primary">Login</a>
+    <mat-card *ngIf="errorMsg">
+        <mat-card-title>Error</mat-card-title>
+        <mat-card-content>{{errorMsg}}</mat-card-content>
+    </mat-card>
 </form>

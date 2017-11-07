@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <mat-icon *ngIf="(user|async)?.uid" (click)="toggleSidenav()">
+  <mat-icon *ngIf="(user|async)?.uid && router.url !== '/login' && router.url !== '/signup'" (click)="toggleSidenav()">
     <i class="material-icons">menu</i>
   </mat-icon>
   <span class="toolbar-spacer"></span>
