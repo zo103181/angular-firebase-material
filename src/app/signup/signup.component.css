@@ -1,13 +1,26 @@
+mat-sidenav-container section {
+    display: flex;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+
+mat-sidenav-container {
+    background: url('/assets/images/backgrounds/2560x2560.png') no-repeat;
+    overflow: hidden;
+    background-size: cover;
+    height: 100%;
+}
+
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 85px 25px 25px 25px;
+    padding: 25px;
 }
 
-form > mat-form-field, form > button {
-    width: 300px;
+form > mat-form-field, form > mat-error, form > button {
+    width: 250px;
 }
 
 form > button {
