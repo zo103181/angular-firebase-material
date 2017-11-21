@@ -5,15 +5,15 @@ import { User } from '../classes/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css']
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
 
   user: User;
-  hide = true;
   errorMsg: string;
+  resetSent: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -25,12 +25,17 @@ export class LoginComponent implements OnInit {
       email: '',
       password: '',
       confirmPassword: ''
-    }
+    };
+    this.resetSent = false;
   }
 
-  signIn() {
-    this.authService.login({ email: this.user.email, password: this.user.password })
-      .then(resolve => this.router.navigate(['home']))
+  resetPassword() {
+    this.authService.resetPassword(this.user.email)
+      .then(() => {
+        this.errorMsg = '';
+        this.resetSent = true;
+      })
       .catch(error => this.errorMsg = error.message);
   }
+
 }

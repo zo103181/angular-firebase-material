@@ -44,6 +44,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SignupComponent } from './signup/signup.component';
     SidenavComponent,
     HomeComponent,
     SignupComponent,
-    EqualValidator
+    EqualValidator,
+    ForgotPasswordComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

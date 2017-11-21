@@ -8,8 +8,12 @@ import { User } from '../classes/user.class';
 export class AuthenticationService {
   private user: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth) { 
+  constructor(private afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
+  }
+
+  authUser() {
+    return this.user;
   }
 
   login(user: User) {
@@ -20,11 +24,11 @@ export class AuthenticationService {
     return this.afAuth.auth.signOut();
   }
 
-  signup(user: User) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+  resetPassword(email: string) {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
-  authUser() {
-    return this.user;
+  signup(user: User) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 }

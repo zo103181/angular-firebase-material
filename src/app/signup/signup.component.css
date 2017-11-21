@@ -28,9 +28,9 @@ form > button {
     margin-bottom: 10px;
 }
 
-form > mat-card {
+form > mat-error {
     margin-top: 10px;
-    width: 250px;
+    margin-bottom: 10px;
 }
 
 form > mat-form-field mat-icon {
