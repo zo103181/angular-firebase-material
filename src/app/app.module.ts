@@ -34,6 +34,7 @@ import {
   MatInputModule,
   MatListModule,
   MatSidenavModule,
+  MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -45,6 +46,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HomeComponent,
     SignupComponent,
     EqualValidator,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ContactsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -70,6 +73,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatInputModule,
     MatListModule,
     MatSidenavModule,
+    MatTableModule,
     MatToolbarModule,
     RouterModule.forRoot(appRoutes)
   ],
