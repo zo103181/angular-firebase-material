@@ -7,7 +7,7 @@ export class SidenavService  {
 
   constructor() {}
 
-  close(): Promise<MatDrawerToggleResult> {
+  close(): Promise<void> {
     return this.sidenav.close();
   }
   
@@ -15,7 +15,7 @@ export class SidenavService  {
     this.sidenav = sidenav;
   }
 
-  toggle(isOpen?: boolean): Promise<MatDrawerToggleResult> {
+  toggle(isOpen?: boolean): Promise<void> {
     return this.sidenav.toggle(isOpen);
   }
 }
