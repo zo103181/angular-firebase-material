@@ -1,0 +1,21 @@
+section {
+    padding: 85px 25px 25px 25px;
+}
+
+.mat-cell,
+.mat-header-cell {
+    overflow: inherit;
+}
+
+.mat-column-checked {
+    flex: 0 0 50px;
+}
+
+.mat-column-menu {
+    flex: 0 0 50px;
+    align-content: right;
+}
+
+h1 {
+    min-height: 48px;
+}
