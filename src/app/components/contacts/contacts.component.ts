@@ -1,37 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Input } from '@angular/compiler/src/core';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+
+import { MatMenu } from '@angular/material/menu/typings/menu-directive';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { Contact } from '../../classes/contact.class';
-import { MatMenu } from '@angular/material/menu/typings/menu-directive';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements OnInit {
-  contact: Contact;
+export class ContactsComponent implements AfterViewInit {
+  dataSource = new MatTableDataSource<Contact>();
   displayedColumns = ['checked', 'name', 'menu'];
-  dataSource = new MatTableDataSource(CONTACT_DATA);
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
-  ngOnInit() {
-    this.contact = {
-      checked: false,
-      name: '',
-      email: '',
-      phone: ''
-    };
+  ngAfterViewInit() {
+    this.contactService.getContacts().subscribe(data => {
+      this.dataSource.data = data;
+    });
   }
-
 }
-
-const CONTACT_DATA: Contact[] = [
-  { checked: false, name: 'Abbott Keitch', email: 'abbott@withinpixels.com', phone: '(555) 555-5555' },
-  { checked: false, name: 'Arnold Matlock', email: 'arnold@withinpixels.com', phone: '(555) 555-5555' },
-  { checked: false, name: 'Barrera Bradbury', email: 'bbradbury@withinpixels.com', phone: '(555) 555-5555' },
-  { checked: false, name: 'Christy Camacho', email: 'ccamacho@withinpixels.com', phone: '(555) 555-5555' },
-  { checked: false, name: 'Estes Stevens', email: 'estevens@withinpixels.com', phone: '(555) 555-5555' },
-];

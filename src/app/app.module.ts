@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AuthenticationGuard } from './services/authentication-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { SidenavService } from './services/sidenav.service';
+import { ContactService } from './services/contact.service';
 
 // Directives
 import { EqualValidator } from './directives/equal-validator.directive';
@@ -20,7 +21,7 @@ import { environment } from '../environments/environment';
 
 // Angular Fire
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Angular Material Components / Animations
@@ -64,7 +65,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -87,6 +88,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
   providers: [
     AuthenticationGuard,
     AuthenticationService,
+    ContactService,
     SidenavService
   ],
   // the main application view, called the root component, that 
