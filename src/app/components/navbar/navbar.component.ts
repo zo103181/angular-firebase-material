@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
-import { AuthenticationService } from '../services/authentication.service';
-import { SidenavService } from '../services/sidenav.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-navbar',
