@@ -13,15 +13,53 @@ import { ContactService } from '../../services/contact.service';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements AfterViewInit {
+export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
   displayedColumns = ['checked', 'name', 'menu'];
+  modifyContact = false;
+  contact: Contact;
 
   constructor(private contactService: ContactService) { }
+
+  ngOnInit() {
+    this.contact = {
+      name: '',
+      email: '',
+      phone: ''
+    }
+  }
 
   ngAfterViewInit() {
     this.contactService.getContacts().subscribe(data => {
       this.dataSource.data = data;
     });
+  }
+
+  add() {
+    this.contact = {
+      name: '',
+      email: '',
+      phone: ''
+    };
+    this.modifyContact = !this.modifyContact;
+  }
+
+  close() {
+    this.modifyContact = !this.modifyContact;
+  };
+
+  delete(contact: Contact) {
+    this.contactService.deleteContact(contact);
+    this.modifyContact = !this.modifyContact;
+  }
+
+  modify(contact: Contact) {
+    Object.assign(this.contact, contact);
+    this.modifyContact = !this.modifyContact;
+  }
+
+  save(contact: Contact) {
+    (contact["id"] === undefined) ? this.contactService.addContact(contact) : this.contactService.updateContact(contact);
+    this.modifyContact = !this.modifyContact;
   }
 }

@@ -19,3 +19,14 @@ section {
 h1 {
     min-height: 48px;
 }
+
+section > mat-card > form {
+    display: flex;
+    flex-direction: column;
+}
+
+section > mat-card > form > button {
+    display:flow-root;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

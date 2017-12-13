@@ -8,18 +8,42 @@ export class ContactService {
   contactsCollection: AngularFirestoreCollection<Contact>;
   contacts: Observable<Contact[]>;
 
+  contactDocument: AngularFirestoreDocument<Contact>;
+
   constructor(public afs: AngularFirestore) {
     this.contactsCollection = afs.collection('contacts');
-  }
+  };
+
+  addContact(contact: Contact) {
+    this.contactsCollection.add({
+      email: contact["email"],
+      phone: contact["phone"],
+      name: contact["name"]
+    });
+  };
+
+  deleteContact(contact: Contact) {
+    this.contactDocument = this.afs.doc(`contacts/${contact.id}`);
+    this.contactDocument.delete();
+  };
 
   getContacts() {
     return this.afs.collection<Contact[]>('contacts').snapshotChanges().map((contacts) => {
       return contacts.map(a => {
         const data = a.payload.doc.data() as Contact;
         const id = a.payload.doc.id;
-        return data;
+        return Object.assign({'id': id }, data);
       });
     });
-  }
+  };
+
+  updateContact(contact: Contact) {
+    this.contactDocument = this.afs.doc(`contacts/${contact.id}`);
+    this.contactDocument.update({
+      email: contact["email"],
+      phone: contact["phone"],
+      name: contact["name"]
+    });
+  };
 
 }
