@@ -1,64 +1,79 @@
 <section *ngIf="!modifyContact">
   <mat-card>
-    <mat-card-title><b>Contacts <button mat-mini-fab (click)="add()" color="accent" style="float: right"><mat-icon>add</mat-icon></button></b></mat-card-title>
-    <mat-table #table [dataSource]="dataSource">
+    <mat-card-title>
+      <b>Contacts
+        <button mat-mini-fab (click)="add()" color="accent" style="float: right">
+          <mat-icon>add</mat-icon>
+        </button>
+      </b>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.data.length != 0">
 
-      <!-- Checkbox Column -->
-      <ng-container matColumnDef="checked">
-        <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox></mat-checkbox>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let contacts">
-          <mat-checkbox [checked]="contacts.checked"></mat-checkbox>
-        </mat-cell>
-      </ng-container>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="checked">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox></mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let contacts">
+            <mat-checkbox [checked]="contacts.checked"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let contacts" (click)="modify(contacts)" style="cursor:pointer">
-          <b>{{contacts.name}}</b>
-        </mat-cell>
-      </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let contacts" (click)="modify(contacts)" style="cursor:pointer">
+            <b>{{contacts.name}}</b>
+          </mat-cell>
+        </ng-container>
 
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-        <mat-cell *matCellDef="let contacts">
-          <a [href]="'mailto:' + contacts.email">{{contacts.email}}</a>
-        </mat-cell>
-      </ng-container>
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+          <mat-cell *matCellDef="let contacts">
+            <a [href]="'mailto:' + contacts.email">{{contacts.email}}</a>
+          </mat-cell>
+        </ng-container>
 
-      <!-- Phone Column -->
-      <ng-container matColumnDef="phone">
-        <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
-        <mat-cell *matCellDef="let contacts"> {{contacts.phone}} </mat-cell>
-      </ng-container>
+        <!-- Phone Column -->
+        <ng-container matColumnDef="phone">
+          <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+          <mat-cell *matCellDef="let contacts"> {{contacts.phone}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="menu">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let contacts">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>phone</mat-icon>
-              <span>{{contacts.phone}}</span>
+        <ng-container matColumnDef="menu">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let contacts">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <button mat-menu-item>
-              <mat-icon>email</mat-icon>
-              <span>{{contacts.email}}</span>
-            </button>
-          </mat-menu>
-        </mat-cell>
-      </ng-container>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>phone</mat-icon>
+                <span>{{contacts.phone}}</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>email</mat-icon>
+                <span>{{contacts.email}}</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+    <mat-card-content *ngIf="dataSource.data.length == 0">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>error_outline</mat-icon>
+          <h4 mat-line>No contacts found!</h4>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
   </mat-card>
-
 </section>
 <section *ngIf="modifyContact">
   <mat-card>

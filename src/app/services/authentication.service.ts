@@ -9,7 +9,7 @@ import { User } from '../classes/user.class';
 
 @Injectable()
 export class AuthenticationService {
-  public user: Observable<firebase.User>;
+  private user: Observable<firebase.User>;
 
   constructor(
     private afAuth: AngularFireAuth,

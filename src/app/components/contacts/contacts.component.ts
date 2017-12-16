@@ -3,6 +3,7 @@ import { Input } from '@angular/compiler/src/core';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { MatMenu } from '@angular/material/menu/typings/menu-directive';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Contact } from '../../classes/contact.class';
@@ -15,9 +16,9 @@ import { ContactService } from '../../services/contact.service';
 })
 export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
-  displayedColumns = ['checked', 'name', 'menu'];
-  modifyContact = false;
-  validateDelete = false;
+  displayedColumns: string[] = ['checked', 'name', 'menu'];
+  modifyContact: boolean = false;
+  validateDelete: boolean = false;
   contact: Contact;
 
   constructor(private contactService: ContactService) { }
@@ -42,11 +43,12 @@ export class ContactsComponent implements AfterViewInit, OnInit {
       email: '',
       phone: ''
     };
+    this.validateDelete = false;
     this.modifyContact = !this.modifyContact;
   }
 
   close() {
-    this.modifyContact = !this.modifyContact;
+    this.modifyContact = false;
   };
 
   delete(contact: Contact) {
@@ -60,6 +62,7 @@ export class ContactsComponent implements AfterViewInit, OnInit {
 
   modify(contact: Contact) {
     Object.assign(this.contact, contact);
+    this.validateDelete = false;
     this.modifyContact = !this.modifyContact;
   }
 
