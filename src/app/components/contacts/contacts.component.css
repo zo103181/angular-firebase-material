@@ -16,17 +16,11 @@ section {
     align-content: right;
 }
 
-h1 {
-    min-height: 48px;
-}
-
-section > mat-card > form {
+section > mat-card > mat-card-content > form {
     display: flex;
     flex-direction: column;
 }
 
-section > mat-card > form > button {
-    display:flow-root;
-    margin-top: 10px;
-    margin-bottom: 10px;
+mat-card-footer {
+    padding: 0 20px 15px 20px;
 }

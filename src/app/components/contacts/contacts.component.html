@@ -1,6 +1,6 @@
 <section *ngIf="!modifyContact">
   <mat-card>
-    <h1>Contacts <button mat-mini-fab (click)="add()" color="accent" style="float: right"><mat-icon>add</mat-icon></button></h1>
+    <mat-card-title><b>Contacts <button mat-mini-fab (click)="add()" color="accent" style="float: right"><mat-icon>add</mat-icon></button></b></mat-card-title>
     <mat-table #table [dataSource]="dataSource">
 
       <!-- Checkbox Column -->
@@ -62,25 +62,32 @@
 </section>
 <section *ngIf="modifyContact">
   <mat-card>
-    <h1>{{ contact.id === undefined ? 'Add' : 'Edit' }}</h1>
-    <form #contactForm="ngForm">
-      <mat-form-field>
-        <input matInput type="text" name="name" placeholder="Name" #name="ngModel" [(ngModel)]="contact.name" required>
-        <mat-error *ngIf="name.invalid && contact.name === ''">Name is <strong>required</strong></mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="tel" name="phone" placeholder="Phone" #phone="ngModel" [(ngModel)]="contact.phone" required>
-        <mat-error *ngIf="phone.invalid && contact.phone === ''">Phone is <strong>required</strong></mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="contact.email" pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}" required>
-        <mat-error *ngIf="email.invalid && contact.email === ''">Email is <strong>required</strong></mat-error>
-        <mat-error *ngIf="email.invalid && contact.email !== ''">Email is <strong>not</strong> formatted properly</mat-error>
-      </mat-form-field>
-
-      <button mat-raised-button type="button" [disabled]="!contactForm.form.valid" (click)="save(contact)" color="primary">Save</button>
-      <button mat-raised-button type="button" *ngIf="contact.id != undefined" (click)="delete(contact)" color="warn">Delete</button>
-      <button mat-raised-button type="button" (click)="close()" color="secondary">Close</button>
-    </form>
+    <mat-card-title><b>{{ contact.id === undefined ? 'Add' : validateDelete ? 'Delete' : 'Edit' }}</b></mat-card-title>
+    <mat-card-content>
+      <form #contactForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" name="name" placeholder="Name" #name="ngModel" [disabled]="validateDelete" [(ngModel)]="contact.name" required>
+          <mat-error *ngIf="name.invalid && contact.name === ''">Name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="tel" name="phone" placeholder="Phone" #phone="ngModel" [disabled]="validateDelete" [(ngModel)]="contact.phone" required>
+          <mat-error *ngIf="phone.invalid && contact.phone === ''">Phone is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" name="email" placeholder="Email" #email="ngModel" [disabled]="validateDelete" [(ngModel)]="contact.email" pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}" required>
+          <mat-error *ngIf="email.invalid && contact.email === ''">Email is <strong>required</strong></mat-error>
+          <mat-error *ngIf="email.invalid && contact.email !== ''">Email is <strong>not</strong> formatted properly</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-footer *ngIf="validateDelete">
+        <button mat-raised-button type="button" (click)="delete(contact)" color="warn">Confirm</button>
+        <button mat-raised-button type="button" (click)="deleteValidation(false)" color="secondary" style="float: right;">Cancel</button>
+    </mat-card-footer>
+    <mat-card-footer *ngIf="!validateDelete">
+        <button mat-raised-button type="button" [disabled]="!contactForm.form.valid" (click)="save(contact)" color="primary">Save</button>
+        <button mat-raised-button type="button" (click)="close()" color="secondary">Close</button>
+        <button mat-raised-button type="button" *ngIf="contact.id != undefined" (click)="deleteValidation(true)" color="warn" style="float: right;">Delete</button>
+    </mat-card-footer>
   </mat-card>
 </section>

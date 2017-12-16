@@ -17,6 +17,7 @@ export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
   displayedColumns = ['checked', 'name', 'menu'];
   modifyContact = false;
+  validateDelete = false;
   contact: Contact;
 
   constructor(private contactService: ContactService) { }
@@ -51,6 +52,10 @@ export class ContactsComponent implements AfterViewInit, OnInit {
   delete(contact: Contact) {
     this.contactService.deleteContact(contact);
     this.modifyContact = !this.modifyContact;
+  }
+
+  deleteValidation(value: boolean) {
+    this.validateDelete = value;
   }
 
   modify(contact: Contact) {

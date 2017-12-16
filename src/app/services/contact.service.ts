@@ -5,10 +5,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ContactService {
-  contactsCollection: AngularFirestoreCollection<Contact>;
-  contacts: Observable<Contact[]>;
-
-  contactDocument: AngularFirestoreDocument<Contact>;
+  private contactsCollection: AngularFirestoreCollection<Contact>;
+  private contactDocument: AngularFirestoreDocument<Contact>;
+  private contacts: Observable<Contact[]>;
 
   constructor(public afs: AngularFirestore) {
     this.contactsCollection = afs.collection('contacts');
@@ -28,11 +27,11 @@ export class ContactService {
   };
 
   getContacts() {
-    return this.afs.collection<Contact[]>('contacts').snapshotChanges().map((contacts) => {
+    return this.afs.collection<Contact[]>('contacts', ref => ref.orderBy('name')).snapshotChanges().map((contacts) => {
       return contacts.map(a => {
         const data = a.payload.doc.data() as Contact;
         const id = a.payload.doc.id;
-        return Object.assign({'id': id }, data);
+        return Object.assign({ 'id': id }, data);
       });
     });
   };
