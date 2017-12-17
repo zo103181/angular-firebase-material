@@ -18,6 +18,7 @@ export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
   displayedColumns: string[] = ['checked', 'name', 'menu'];
   modifyContact: boolean = false;
+  isLoading: boolean = true;
   validateDelete: boolean = false;
   contact: Contact;
 
@@ -34,6 +35,7 @@ export class ContactsComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.contactService.getContacts().subscribe(data => {
       this.dataSource.data = data;
+      this.isLoading = false;
     });
   }
 

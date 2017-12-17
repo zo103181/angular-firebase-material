@@ -1,4 +1,5 @@
 <section *ngIf="!modifyContact">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-card>
     <mat-card-title>
       <b>Contacts
@@ -7,8 +8,8 @@
         </button>
       </b>
     </mat-card-title>
-    <mat-card-content>
-      <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.data.length != 0">
+    <mat-card-content *ngIf="dataSource.data.length != 0 && !isLoading">
+      <mat-table #table [dataSource]="dataSource">
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="checked">
@@ -65,11 +66,18 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </mat-card-content>
-    <mat-card-content *ngIf="dataSource.data.length == 0">
+    <mat-card-content *ngIf="dataSource.data.length == 0 && !isLoading">
       <mat-list>
         <mat-list-item>
           <mat-icon mat-list-icon>error_outline</mat-icon>
           <h4 mat-line>No contacts found!</h4>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-content *ngIf="isLoading">
+      <mat-list>
+        <mat-list-item>
+          <h4 mat-line>Please wait while we load your contacts ...</h4>
         </mat-list-item>
       </mat-list>
     </mat-card-content>

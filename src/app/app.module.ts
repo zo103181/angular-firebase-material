@@ -36,6 +36,7 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatSidenavModule,
   MatTableModule,
   MatToolbarModule
@@ -77,6 +78,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatProgressBarModule,
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
