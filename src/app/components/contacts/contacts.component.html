@@ -1,7 +1,17 @@
 <section *ngIf="!modifyContact">
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-card>
-    <mat-card-title>
+    <mat-card-title *ngIf="selection.selected.length > 0">
+      <b>
+        {{selection.selected.length}}
+        <!--
+          <button mat-icon-button style="float: right">
+            <mat-icon>delete</mat-icon>
+          </button>
+        -->
+      </b>
+    </mat-card-title>
+    <mat-card-title *ngIf="selection.selected.length == 0">
       <b>Contacts
         <button mat-mini-fab (click)="add()" color="accent" style="float: right">
           <mat-icon>add</mat-icon>
@@ -10,17 +20,17 @@
     </mat-card-title>
     <mat-card-content *ngIf="dataSource.data.length != 0 && !isLoading">
       <mat-table #table [dataSource]="dataSource">
-
+  
         <!-- Checkbox Column -->
-        <ng-container matColumnDef="checked">
+        <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
-            <mat-checkbox></mat-checkbox>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
           </mat-header-cell>
           <mat-cell *matCellDef="let contacts">
-            <mat-checkbox [checked]="contacts.checked"></mat-checkbox>
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(contacts) : null" [checked]="selection.isSelected(contacts)"></mat-checkbox>
           </mat-cell>
         </ng-container>
-
+  
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
@@ -28,7 +38,7 @@
             <b>{{contacts.name}}</b>
           </mat-cell>
         </ng-container>
-
+  
         <!-- Email Column -->
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
@@ -36,13 +46,13 @@
             <a [href]="'mailto:' + contacts.email">{{contacts.email}}</a>
           </mat-cell>
         </ng-container>
-
+  
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
           <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
           <mat-cell *matCellDef="let contacts"> {{contacts.phone}} </mat-cell>
         </ng-container>
-
+  
         <ng-container matColumnDef="menu">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let contacts">
@@ -61,11 +71,12 @@
             </mat-menu>
           </mat-cell>
         </ng-container>
-
+  
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </mat-card-content>
+    <!-- No Contacts Found -->
     <mat-card-content *ngIf="dataSource.data.length == 0 && !isLoading">
       <mat-list>
         <mat-list-item>
@@ -74,6 +85,7 @@
         </mat-list-item>
       </mat-list>
     </mat-card-content>
+    <!-- Data Loading -->
     <mat-card-content *ngIf="isLoading">
       <mat-list>
         <mat-list-item>

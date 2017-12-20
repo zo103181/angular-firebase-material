@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Input } from '@angular/compiler/src/core';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SelectionModel } from '@angular/cdk/collections';
 
 import { MatMenu } from '@angular/material/menu/typings/menu-directive';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -16,7 +17,8 @@ import { ContactService } from '../../services/contact.service';
 })
 export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
-  displayedColumns: string[] = ['checked', 'name', 'menu'];
+  selection = new SelectionModel<Contact>(true, []);
+  displayedColumns: string[] = ['select', 'name', 'menu'];
   modifyContact: boolean = false;
   isLoading: boolean = true;
   validateDelete: boolean = false;
@@ -55,21 +57,39 @@ export class ContactsComponent implements AfterViewInit, OnInit {
 
   delete(contact: Contact) {
     this.contactService.deleteContact(contact);
-    this.modifyContact = !this.modifyContact;
+    this.close();
   }
 
   deleteValidation(value: boolean) {
     this.validateDelete = value;
   }
 
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  
   modify(contact: Contact) {
     Object.assign(this.contact, contact);
+    this.modifyContact = true;
     this.validateDelete = false;
-    this.modifyContact = !this.modifyContact;
   }
 
   save(contact: Contact) {
-    (contact["id"] === undefined) ? this.contactService.addContact(contact) : this.contactService.updateContact(contact);
-    this.modifyContact = !this.modifyContact;
+    if (contact["id"] === undefined) {
+      this.contactService.addContact(contact);
+    } else {
+      this.contactService.updateContact(contact);
+    } 
+    this.modifyContact = false
   }
 }

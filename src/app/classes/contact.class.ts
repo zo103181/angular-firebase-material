@@ -1,5 +1,5 @@
 export interface Contact {
-    checked?: boolean;
+    select?: boolean;
     id?: string;
     name: string;
     email: string;
