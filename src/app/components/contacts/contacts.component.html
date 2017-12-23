@@ -50,7 +50,9 @@
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
           <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
-          <mat-cell *matCellDef="let contacts"> {{contacts.phone}} </mat-cell>
+          <mat-cell *matCellDef="let contacts">
+            <a [href]="'tel:' + contacts.phone">{{contacts.phone}}</a>
+          </mat-cell>
         </ng-container>
   
         <ng-container matColumnDef="menu">

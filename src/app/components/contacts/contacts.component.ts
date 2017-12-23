@@ -18,7 +18,7 @@ import { ContactService } from '../../services/contact.service';
 export class ContactsComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<Contact>();
   selection = new SelectionModel<Contact>(true, []);
-  displayedColumns: string[] = ['select', 'name', 'menu'];
+  displayedColumns: string[] = ['select', 'name', 'email', 'phone', 'menu'];
   modifyContact: boolean = false;
   isLoading: boolean = true;
   validateDelete: boolean = false;

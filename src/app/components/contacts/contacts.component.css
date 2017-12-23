@@ -20,3 +20,15 @@ section > mat-card > mat-card-content > form {
 mat-card-footer {
     padding: 0 20px 15px 20px;
 }
+
+@media screen and (min-width: 500px) {
+    .mat-column-menu {
+       display: none; 
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mat-column-email, .mat-column-phone {
+        display: none;
+    }
+}
