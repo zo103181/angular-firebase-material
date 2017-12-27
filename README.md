@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
 
+## Angular CLI NPM
+
+Run `npm install -g @angular/cli` to install globally
+
 ## Firebase NPM
 
 Run `npm install --save firebase angularfire2` to install in your project.
+
+## GIT Ignore
+
+Run `git update-index --assume-unchanged path/to/file.txt` to ignore files you've already checked in. 
 
 ## Development server
 
