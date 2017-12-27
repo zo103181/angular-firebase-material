@@ -24,6 +24,18 @@ export class NavbarComponent implements OnInit {
     this.user = this.authService.authUser();
   }
 
+  showToobarMenu(router: Router) {
+    // router.url !== '/login' && router.url !== '/signup' && router.url !== '/forgot-password'
+    switch (router.url) {
+      case '/login':
+      case '/signup':
+      case '/forgot-password':
+        return false;
+      default:
+        return true;
+    }
+  }
+  
   toggleSidenav() {
     this.sidenavService.toggle();
   }

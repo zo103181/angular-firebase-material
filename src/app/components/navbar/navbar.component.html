@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="router.url !== '/login' && router.url !== '/signup' && router.url !== '/forgot-password'">
+<mat-toolbar color="primary" *ngIf="showToobarMenu(router)">
   <mat-icon *ngIf="(user|async)?.uid" (click)="toggleSidenav()">
     <i class="material-icons">menu</i>
   </mat-icon>
