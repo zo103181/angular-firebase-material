@@ -1,0 +1,12 @@
+section {
+    padding: 85px 25px 25px 25px;
+}
+
+section > mat-card > mat-card-content > form {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card-footer {
+    padding: 0 20px 15px 20px;
+}

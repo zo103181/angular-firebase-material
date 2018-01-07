@@ -30,7 +30,7 @@ export class AuthenticationService {
 
   login(user: User) {
     return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((credential) => {
-      this.updateUserData(credential);
+      this.updateUserData(credential, false);
     });
   }
 
@@ -44,17 +44,25 @@ export class AuthenticationService {
 
   signup(user: User) {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then((credential) => {
-      this.updateUserData(credential);
+      this.updateUserData(credential, true);
     });
   }
 
-  private updateUserData(user) {
+  private updateUserData(user, isSignup: boolean) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
+    const data = {
       uid: user.uid,
-      email: user.email
+      email: user.email,
+      firstname: '',
+      lastname: '',
+      address: {
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
     }
-    return userRef.set(data)
+    return (isSignup) ? userRef.set(data) : userRef;
   }
 }

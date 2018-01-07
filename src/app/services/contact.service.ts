@@ -10,7 +10,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class ContactService {
   private contactsCollection: AngularFirestoreCollection<Contact>;
   private contactDocument: AngularFirestoreDocument<Contact>;
-  private contacts: Observable<Contact[]>;
 
   private user: firebase.User;
 

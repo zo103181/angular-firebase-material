@@ -1,0 +1,46 @@
+<section>
+  <mat-card>
+    <mat-card-title>
+      <b>General</b>
+    </mat-card-title>
+    <mat-card-content>
+      <form #settingsForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" name="firstname" placeholder="First Name" #firstname="ngModel" [(ngModel)]="settings.firstname" required>
+          <mat-error *ngIf="firstname.invalid && settings.firstname === ''">First Name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="lastname" placeholder="Last Name" #lastname="ngModel" [(ngModel)]="settings.lastname" required>
+          <mat-error *ngIf="lastname.invalid && settings.lastname === ''">Last Name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="settings.email" pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}" required>
+          <mat-error *ngIf="email.invalid && settings.email === ''">Email is <strong>required</strong></mat-error>
+          <mat-error *ngIf="email.invalid && settings.email !== ''">Email is <strong>not</strong> formatted properly</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-title>
+      <b>Address</b>
+    </mat-card-title>
+    <mat-card-content>
+      <form #addressForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" name="street" placeholder="Street" #street="ngModel" [(ngModel)]="settings.address.street"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="city" placeholder="City" #city="ngModel" [(ngModel)]="settings.address.city"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="state" placeholder="State" #state="ngModel" [(ngModel)]="settings.address.state"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="zip" placeholder="Zip" #zip="ngModel" [(ngModel)]="settings.address.zip"/>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-raised-button type="button" color="primary" (click)="save(settings)">Save</button>
+    </mat-card-footer>
+  </mat-card>
+</section>

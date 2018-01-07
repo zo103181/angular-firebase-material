@@ -7,8 +7,9 @@ import { RouterModule } from '@angular/router';
 // Services
 import { AuthenticationGuard } from './services/authentication-guard.service';
 import { AuthenticationService } from './services/authentication.service';
-import { SidenavService } from './services/sidenav.service';
 import { ContactService } from './services/contact.service';
+import { SidenavService } from './services/sidenav.service';
+import { SettingsService } from './services/settings.service';
 
 // Directives
 import { EqualValidator } from './directives/equal-validator.directive';
@@ -51,6 +52,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     SignupComponent,
     EqualValidator,
     ForgotPasswordComponent,
-    ContactsComponent
+    ContactsComponent,
+    SettingsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -91,7 +94,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     AuthenticationGuard,
     AuthenticationService,
     ContactService,
-    SidenavService
+    SidenavService,
+    SettingsService
   ],
   // the main application view, called the root component, that 
   // hosts all other app views. Only the root module should set this bootstrap property.
