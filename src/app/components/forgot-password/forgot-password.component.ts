@@ -30,6 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   resetPassword() {
+    this.errorMsg = null;
     this.authService.resetPassword(this.user.email)
       .then(() => {
         this.errorMsg = '';

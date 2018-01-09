@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
+    this.errorMsg = null;
     if (this.user.password !== this.user.confirmPassword) {
       this.throwErrorMsg('Your passwords do not match!');
     } else {

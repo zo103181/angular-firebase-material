@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    this.errorMsg = null;
     this.authService.login({ email: this.user.email, password: this.user.password })
       .then(resolve => this.router.navigate(['home']))
       .catch(error => this.errorMsg = error.message);
