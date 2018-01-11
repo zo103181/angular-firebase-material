@@ -1,7 +1,7 @@
 <mat-sidenav-container>
     <mat-sidenav disableClose position="end" mode="side" opened="true">
         <form #loginForm="ngForm">
-            <h2>LOGIN</h2>
+            <h2>Login</h2>
             <mat-form-field>
                 <input matInput type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="user.email" pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}"
                     required>
@@ -36,3 +36,39 @@
         <h1>Angular + Firebase + Material</h1>
     </section>
 </mat-sidenav-container>
+<section class="mat-mobile-container">
+    <section>
+        <h2>Angular + Firebase + Material</h2>
+    </section>
+    <form #loginForm="ngForm">
+        <h2>Login</h2>
+        <mat-form-field>
+            <input matInput type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="user.email" pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,15}"
+                required>
+            <mat-error *ngIf="email.invalid && user.email === ''">
+                Email is
+                <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="email.invalid && user.email !== ''">
+                Email is
+                <strong>not</strong> formatted properly
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [type]="hide ? 'password' : 'text'" name="password" placeholder="Password" #passwrd [(ngModel)]="user.password"
+                (keyup.enter)="signIn()" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="passwrd.required">
+                Password is
+                <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <a href="/forgot-password" color="accent">Forgot Password?</a>
+        <mat-error *ngIf="errorMsg">
+            {{errorMsg}}
+        </mat-error>
+        <button mat-raised-button type="button" [disabled]="!loginForm.form.valid" (click)="signIn()" color="primary">Log In</button>
+        <div style="margin-top: 5px;">Don't have an account?</div>
+        <a href="/signup" color="accent">Create an account</a>
+    </form>
+</section>
