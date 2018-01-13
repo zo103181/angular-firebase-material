@@ -32,7 +32,11 @@
           <input matInput type="text" name="city" placeholder="City" #city="ngModel" [(ngModel)]="settings.address.city"/>
         </mat-form-field>
         <mat-form-field>
-          <input matInput type="text" name="state" placeholder="State" #state="ngModel" [(ngModel)]="settings.address.state"/>
+          <mat-select name="state" placeholder="State" #state="ngModel" [(ngModel)]="settings.address.state">
+            <mat-option *ngFor="let state of states" [value]="state.value">
+              {{state.viewValue}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field>
           <input matInput type="text" name="zip" placeholder="Zip" #zip="ngModel" [(ngModel)]="settings.address.zip"/>

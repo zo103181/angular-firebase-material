@@ -38,6 +38,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatProgressBarModule,
+  MatSelectModule,
   MatSidenavModule,
   MatTableModule,
   MatToolbarModule
@@ -82,6 +83,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatListModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatSelectModule,
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
