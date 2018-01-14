@@ -7,6 +7,10 @@ section > mat-card > mat-card-content > form {
     flex-direction: column;
 }
 
+mat-form-field {
+    padding: 0 20px;
+}
+  
 mat-card-footer {
     padding: 0 20px 15px 20px;
 }

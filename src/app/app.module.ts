@@ -1,6 +1,7 @@
 // Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -74,6 +75,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
