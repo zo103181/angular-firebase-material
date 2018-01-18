@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   user: Observable<firebase.User>;
 
   constructor(
-    private authService: AuthenticationService, 
+    private authService: AuthenticationService,
     private router: Router,
     private sidenavService: SidenavService
   ) { }
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
         return true;
     }
   }
-  
+
   toggleSidenav() {
     this.sidenavService.toggle();
   }
