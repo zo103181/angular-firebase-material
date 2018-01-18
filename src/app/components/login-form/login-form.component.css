@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+form > mat-form-field, form > mat-error, form > button {
+    width: 250px;
+}
+
+form > button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+form > mat-error {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+form > mat-form-field mat-icon {
+    cursor: pointer;
+}

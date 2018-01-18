@@ -1,7 +1,7 @@
 // Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -27,7 +27,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Angular Material Components / Animations
-// -- be sure to import the Angular Material modules 
+// -- be sure to import the Angular Material modules
 // -- after Angular's BrowserModule, as the import order matters
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -55,6 +55,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     EqualValidator,
     ForgotPasswordComponent,
     ContactsComponent,
-    SettingsComponent
+    SettingsComponent,
+    LoginFormComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -91,8 +93,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatToolbarModule,
     RouterModule.forRoot(appRoutes)
   ],
-  // creators of services that this module contributes to 
-  // the global collection of services; 
+  // creators of services that this module contributes to
+  // the global collection of services;
   // they become accessible in all parts of the app.
   providers: [
     AuthenticationGuard,
@@ -101,7 +103,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     SidenavService,
     SettingsService
   ],
-  // the main application view, called the root component, that 
+  // the main application view, called the root component, that
   // hosts all other app views. Only the root module should set this bootstrap property.
   bootstrap: [AppComponent]
 })
