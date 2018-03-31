@@ -17,9 +17,9 @@ export class AuthenticationService {
   ) {
     this.user = afAuth.authState.switchMap(user => {
       if (user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
       } else {
-        return Observable.of(null)
+        return Observable.of(null);
       }
     });
   }
@@ -62,7 +62,7 @@ export class AuthenticationService {
         state: '',
         zip: ''
       }
-    }
+    };
     return (isSignup) ? userRef.set(data) : userRef;
   }
 }
